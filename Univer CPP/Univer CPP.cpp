@@ -14,14 +14,12 @@ int main() {
 
         int digits[k];
 
-        // Вираховуємо кожну старшу цифру і зберігаємо її у масив
         int tempN = n;
         for (int i = k - 1; i >= 0; i--) {
             digits[i] = tempN % 10;
             tempN /= 10;
         }
 
-        // Використовуємо масив для підрахунку кількості унікальних цифр
         int uniqueCount = 0;
         for (int i = 0; i < k; i++) {
             bool isUnique = true;

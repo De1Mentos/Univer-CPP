@@ -2,7 +2,7 @@
 #include <cmath>
 
 int main() {
-    std::cout << " lab_01_56, Roma Dzemchuk, PI23b " << std::endl;
+    std::cout << " lab_01_56, Roma Dzemchuk, PE23b " << std::endl;
 
         int n;
         const int k = 3;

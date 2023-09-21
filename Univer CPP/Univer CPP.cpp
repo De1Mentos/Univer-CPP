@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 
-int main() {
+int main() 
+{
+    std::cout << " lab_03_73, Roma Dzemchuk, PE23b, Group 6 " << std::endl; //Це я
     double usd_to_uah = 27.65;
 
     double eur_to_uah = 33;

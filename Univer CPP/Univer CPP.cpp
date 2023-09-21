@@ -2,6 +2,7 @@
 
 int main()
 {
+    std::cout << " lab_02_49, Roma Dzemchuk, PE23b, Group 6 " << std::endl; //Це я
     int year;
     std::cout << "Set Year: ";
     std::cin >> year;

@@ -1,21 +1,49 @@
-﻿// Univer CPP.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
+#include <vector>
 
-#include <iostream>
+int main() {
+    int numRows, numCols;
+    std::cout << "Enter the number of rows and columns: ";
+    std::cin >> numRows >> numCols;
 
-int main()
-{
-    int x = 1;
-    std::cout << x - 3;
+    std::vector<std::vector<int>> matrix(numRows, std::vector<int>(numCols));
+
+    for (int i = 0; i < numRows; i++) {
+        for (int j = 0; j < numCols; j++) {
+            std::cout << "Enter an element [" << i << "][" << j << "]: ";
+            std::cin >> matrix[i][j];
+        }
+    }
+
+    int minProduct = 2147483647;
+    int minColumnIndex = -1;
+
+    for (int j = 0; j < numCols; j++) {
+        int product = 1;
+        bool allElementsWithinRange = true;
+
+        for (int i = 0; i < numRows; i++) {
+            if (abs(matrix[i][j]) <= 10) {
+                product *= matrix[i][j];
+            }
+            else {
+                allElementsWithinRange = false;
+                break;
+            }
+        }
+
+        if (allElementsWithinRange && product < minProduct) {
+            minProduct = product;
+            minColumnIndex = j;
+        }
+    }
+
+    if (minColumnIndex != -1) {
+        std::cout << "The column with the minimum product of elements: " << minColumnIndex << std::endl;
+    }
+    else {
+        std::cout << "The matrix does not contain any columns that satisfy the condition." << std::endl;
+    }
+
+    return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.

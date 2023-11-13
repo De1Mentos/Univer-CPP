@@ -21,6 +21,6 @@ int main() {
     std::string str = "12345"; // Рядок десяткових цифр
     int number = STOI(str);    // Виклик рекурсивної функції для перетворення
 
-    std::cout << "Результат: " << number << std::endl;
+    std::cout << "Result: " << number << std::endl;
     return 0;
 }

@@ -28,7 +28,6 @@ double calculateAverageInterval(const std::vector<HistoricalDate>& dates) {
 }
 
 int main() {
-    // Create a vector of historical dates
     std::vector<HistoricalDate> historicalDates = {
         {1776, "Declaration of Independence of the United States"},
         {1789, "French Revolution"},

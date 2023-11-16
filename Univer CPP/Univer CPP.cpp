@@ -22,7 +22,6 @@ double calculateAverageInterval(const std::vector<HistoricalDate>& dates) {
         totalInterval += interval;
     }
 
-    // Calculate the average interval
     double averageInterval = totalInterval / (dates.size() - 1);
     return averageInterval;
 }

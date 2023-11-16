@@ -32,7 +32,8 @@ int main() {
         {1789, "French Revolution"},
         {1865, "End of the American Civil War"},
         {1914, "Start of World War I"},
-        {1945, "End of World War II"}
+        {1945, "End of World War II"},
+
     };
 
     double avgInterval = calculateAverageInterval(historicalDates);

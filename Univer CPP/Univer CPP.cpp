@@ -1,49 +1,27 @@
-﻿#include <Windows.h>
+﻿#include <SFML/Graphics.hpp>
 
-int rectangleWidth = 200;
-int rectangleHeight = 50;
+using namespace sf;
 
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-    switch (uMsg) {
-    case WM_CLOSE:
-        DestroyWindow(hwnd);
-        break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-    case WM_SIZE:
-        rectangleWidth = LOWORD(lParam);
-        rectangleHeight = HIWORD(lParam);
-        break;
-    default:
-        return DefWindowProc(hwnd, uMsg, wParam, lParam);
-    }
-    return 0;
-}
+int main()
+{
+	// Объект, который, собственно, является главным окном приложения
+	RenderWindow window(VideoMode(200, 200), "SFML Works!");
 
-int main() {
-    WNDCLASS wc = {};
-    wc.lpfnWndProc = WindowProc;
-    wc.hInstance = GetModuleHandle(nullptr);
-    wc.lpszClassName = L"ResizableRectangleClass";
-    RegisterClass(&wc);
+	// Главный цикл приложения. Выполняется, пока открыто окно
+	while (window.isOpen())
+	{
+		// Обрабатываем очередь событий в цикле
+		Event event;
+		while (window.pollEvent(event))
+		{
+			// Пользователь нажал на «крестик» и хочет закрыть окно?
+			if (event.type == Event::Closed)
+				// тогда закрываем его
+				window.close();
+		}
+		// Отрисовка окна	
+		window.display();
+	}
 
-    HWND hwnd = CreateWindowEx(0, wc.lpszClassName, L"Resizable Rectangle", WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, 800, 500, nullptr, nullptr, wc.hInstance, nullptr);
-
-    if (!hwnd) {
-        MessageBox(nullptr, L"Failed to create window", L"Error", MB_OK | MB_ICONERROR);
-        return -1;
-    }
-
-    ShowWindow(hwnd, SW_SHOWNORMAL);
-    UpdateWindow(hwnd);
-
-    MSG msg = {};
-    while (GetMessage(&msg, nullptr, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return 0;
+	return 0;
 }

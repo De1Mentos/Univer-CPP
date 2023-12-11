@@ -1,25 +1,27 @@
 ﻿#include <SFML/Graphics.hpp>
 
-using namespace sf;
-
 int main()
 {
-	// Объект, который, собственно, является главным окном приложения
-	RenderWindow window(VideoMode(200, 200), "SFML Works!");
+	// Создаем окно размером 600 на 600 и частотой обновления 60 кадров в секунду
+	sf::RenderWindow window(sf::VideoMode(600, 600), "15");
+	window.setFramerateLimit(60);
 
-	// Главный цикл приложения. Выполняется, пока открыто окно
+	sf::Event event;
+
 	while (window.isOpen())
 	{
-		// Обрабатываем очередь событий в цикле
-		Event event;
 		while (window.pollEvent(event))
 		{
-			// Пользователь нажал на «крестик» и хочет закрыть окно?
-			if (event.type == Event::Closed)
-				// тогда закрываем его
-				window.close();
+			if (event.type == sf::Event::Closed) window.close();
+			if (event.type == sf::Event::KeyPressed)
+			{
+				// Получаем нажатую клавишу - выполняем соответствующее действие
+				if (event.key.code == sf::Keyboard::Escape) window.close();
+			}
 		}
-		// Отрисовка окна	
+
+		// Выполняем необходимые действия по отрисовке
+		window.clear();
 		window.display();
 	}
 

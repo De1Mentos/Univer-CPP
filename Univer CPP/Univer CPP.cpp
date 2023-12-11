@@ -1,4 +1,5 @@
 ﻿#include <SFML/Graphics.hpp>
+#pragma comment(lib, "sfml-system-d.libkernel.lib")
 
 int main()
 {

@@ -1,47 +1,46 @@
 ﻿#include <iostream>
 #include <fstream>
-#include <sstream>
 #include <vector>
+#include <iomanip>
 
-void createFile(const std::vector<double>& numbers, const std::string& filename) {
-    std::ofstream file(filename);
-    if (!file) {
-        std::cerr << "Failed to open file: " << filename << std::endl;
+void countAndPrintHistogram(const std::string& fileName) {
+    std::ifstream inputFile(fileName);
+
+    if (!inputFile.is_open()) {
+        std::cerr << "Unable to open the file." << std::endl;
         return;
     }
 
-    for (const auto& num : numbers) {
-        file << num << "\n";
-    }
-}
+    std::vector<int> wordLengthCount(16, 0);
 
-void rewriteFile() {
-    std::ifstream file("numbers.txt");
-    if (!file) {
-        std::cerr << "Failed to open file: numbers.txt" << std::endl;
-        return;
+    std::string word;
+    while (inputFile >> word) {
+        size_t wordLength = std::min(word.length(), static_cast<size_t>(15));
+        wordLengthCount[wordLength]++;
     }
 
-    std::vector<double> numbers;
-    std::string line;
-    while (std::getline(file, line)) {
-        numbers.push_back(std::stod(line));
+    // Вивід гістограми
+    std::cout << "Word Length Histogram:" << std::endl;
+    for (size_t i = 1; i < wordLengthCount.size(); ++i) {
+        std::cout << std::setw(2) << i << " characters: ";
+        for (int j = 0; j < wordLengthCount[i]; ++j) {
+            std::cout << '*';
+        }
+        std::cout << std::endl;
     }
 
-    // Reverse the order of the components
-    for (int i = 0; i < numbers.size() / 2; ++i) {
-        std::swap(numbers[i], numbers[numbers.size() - 1 - i]);
+    // Загальна кількість слів
+    int totalWords = 0;
+    for (int count : wordLengthCount) {
+        totalWords += count;
     }
 
-    file.close();
-
-    createFile(numbers, "numbers.txt");
+    std::cout << "Total words: " << totalWords << std::endl;
 }
 
 int main() {
-    std::vector<double> numbers = { 3.14, 2.71, 1.618 };
-    createFile(numbers, "data.txt");
-    rewriteFile();
+    std::string fileName = "input.txt";
+    countAndPrintHistogram(fileName);
 
     return 0;
 }
